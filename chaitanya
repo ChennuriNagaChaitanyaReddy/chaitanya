@@ -1,0 +1,23 @@
+contract MyToken {
+
+    // public variables here
+    string public name = "META";
+    string public symbol = "MIT";
+    uint public totalTokens = 0;
+
+    // mapping variable here
+    mapping(address => uint) public userBalances;
+
+    // mint function
+    function mint(address _user, uint _amount) public {
+        totalTokens += _amount;
+        userBalances[_user] += _amount;
+    }
+
+    // burn function
+    function burn(address _user, uint _amount) public {
+        require(userBalances[_user] >= _amount, "Insufficient balance");
+        totalTokens -= _amount;
+        userBalances[_user] -= _amount;
+    }
+}
